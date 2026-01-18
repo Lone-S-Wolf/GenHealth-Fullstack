@@ -1,0 +1,54 @@
+<div class="max-w-7xl mx-auto mt-16 mb-30 p-6 bg-white/70 rounded-xl shadow-sm border border-emerald-100">
+
+  <!-- HEADER -->
+  <h2 class="text-center font-semibold text-lg text-emerald-800 mb-6">
+    Frequently Asked Questions
+  </h2>
+
+  <!-- SEARCH BAR -->
+  <div class="flex items-center justify-center mb-6">
+    <div class="relative w-full max-w-2xl">
+      <input #searchInput type="text" class="placeholder:italic" placeholder="Search FAQs..."
+        (keydown.enter)="filterFaqs(searchInput.value)" />
+
+      <!-- Search button -->
+      <button class="absolute right-10 top-1/2 -translate-y-1/2 p-2 hover:bg-emerald-50 rounded"
+        (click)="filterFaqs(searchInput.value)" title="Search" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <circle cx="11" cy="11" r="6" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </button>
+
+      <!-- Clear button -->
+      <button class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-emerald-50 rounded"
+        (click)="searchInput.value=''; filterFaqs()" title="Clear" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- EMPTY OR INVALID -->
+  @if (!faqs || faqs.length === 0) {
+  <app-faq-item [errorMode]="true"></app-faq-item>
+  }
+
+  <!-- LIST -->
+  @if (filteredFaqs && filteredFaqs.length > 0) {
+  <div class="space-y-3">
+    @for (item of filteredFaqs; track $index) {
+    <app-faq-item [question]="item.question" [answer]="item.answer"></app-faq-item>
+    }
+  </div>
+  }
+  @else {
+    <div>
+      <app-faq-item [errorMode]="true"></app-faq-item>
+    </div>
+  }
+</div>

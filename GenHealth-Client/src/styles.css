@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+.landing-font {
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --color-background-primary: #F5F7FA;
+    --color-background-secondary: #FFFFFF;
+    --color-text-primary: #000000;
+    --color-accent-color: #F5A314;
+    --color-icon-color: #3B434E;
+
+    --color-navbar-bg: #FFFFFF;
+    --color-navbar-text: #1A504C;
+    --color-footer-bg: #A8D5BA;
+    --color-footer-text: #FFFFFF;
+
+    --color-btn-positive-bg: #5BC88A;
+    --color-btn-positive-text: #000000;
+    --color-btn-neutral-bg: #F5F7FA;
+    --color-btn-neutral-text: #373E49;
+    --color-btn-negative-bg: #FBD0DA;
+    --color-btn-negative-text: #3B434E;
+    --color-btn-cta-bg: #F5A314;
+    --color-btn-cta-text: #000000;
+
+    --color-msg-error: #EF4444;
+    --color-msg-warning: #D97706;
+    --color-msg-info: #3B82F6;
+    --color-msg-success: #2EB857;
+}
+
+@layer components {
+    button {
+        @apply font-semibold font-sans py-2 px-5 rounded-md border-2 border-transparent cursor-pointer transition-colors duration-200 ease-in-out;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+
+    /* Button variations using your CSS variables for theming */
+    .btn-login {
+        background-color: var(--color-btn-neutral-bg);
+        color: var(--color-btn-neutral-text);
+        border-color: var(--color-btn-neutral-text);
+    }
+
+    .btn-login:hover {
+        background-color: var(--color-navbar-text);
+        color: var(--color-navbar-bg);
+    }
+
+    .btn-continue {
+        background-color: var(--color-btn-positive-bg);
+        color: var(--color-btn-positive-text);
+        border-color: var(--color-btn-negative-text);
+    }
+
+    .btn-continue:hover {
+        background-color: #0d7b3f;
+        color: var(--color-background-secondary);
+    }
+
+    .btn-cancel {
+        background-color: var(--color-btn-negative-bg);
+        color: var(--color-btn-negative-text);
+        border-color: var(--color-btn-negative-text);
+    }
+
+    .btn-cancel:hover {
+        background-color: var(--color-msg-error);
+        color: var(--color-background-secondary);
+    }
+
+    .btn-clear {
+        background-color: transparent;
+        color: var(--color-btn-neutral-text);
+        border-color: var(--color-btn-neutral-text);
+    }
+
+    .btn-clear:hover {
+        background-color: var(--color-btn-neutral-text);
+        color: var(--color-btn-neutral-bg);
+    }
+
+    /* Inputs / textarea */
+    input,
+    textarea {
+        /* text & background */
+        @apply text-black bg-white rounded-md;
+        /* border and radius — keep exact 1px border as original */
+        border: 1px solid black;
+        /* padding preserved */
+        padding: 0.5rem 0.75rem;
+        width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: 3px solid rgb(163, 163, 163);
+        /* Tailwind gray-400 */
+        outline-offset: 1px;
+    }
+
+    /* helper input classes */
+    .input-normal {
+        /* 2.5rem height */
+        @apply h-10;
+    }
+
+    .input-long {
+        /* min-height 6rem and vertical resize */
+        min-height: 6rem;
+        resize: vertical;
+    }
+
+    /* label */
+    label {
+        @apply block font-sans font-semibold select-none;
+        color: var(--color-text-primary);
+        padding: 0.25rem 0.5rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+}
+
+/* Hide scrollbar (Chrome, Edge, Safari) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar (Firefox) */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}

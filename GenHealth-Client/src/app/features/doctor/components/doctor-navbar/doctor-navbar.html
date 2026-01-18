@@ -1,0 +1,36 @@
+<header
+    class="bg-white border-b border-gray-200 shadow-sm fixed top-0 left-0 right-0 z-40 h-16 flex items-center px-4 md:px-6 transition-all duration-300">
+
+    <div class="flex items-center space-x-4">
+
+        <button (click)="toggleSidebar.emit()"
+            class="p-2 mr-4 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-colors"
+            aria-label="Toggle Sidebar">
+            <img src="./icons/App-Menu.png" alt="Menu" class="w-6 h-6">
+        </button>
+    </div>
+
+    <div class="flex-grow">
+        <h1 class="text-2xl font-medium text-emerald-800 truncate">
+            {{ pageTitle() }}
+        </h1>
+    </div>
+
+    <div class="flex items-center space-x-4">
+
+        <div class="text-xl text-gray-500 font-mono hidden sm:block">
+            {{ currentTime() | date:'EEE MMM dd y, h:mm:ss a' }}
+        </div>
+
+        <button (click)="notificationsClicked()"
+            class="relative p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+            aria-label="Notifications">
+            <img src="./icons/App-notification.png" alt="Notifications" class="w-6 h-6">
+
+            @if (hasNewNotifications) {
+            <span class="absolute top-1 right-1 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500"></span>
+            }
+        </button>
+    </div>
+
+</header>

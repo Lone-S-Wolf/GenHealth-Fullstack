@@ -1,0 +1,23 @@
+@if (errorMode) {
+<div class="rounded-lg border border-red-300 bg-red-50 p-4 text-red-700">
+    Unable to load support information. Please try again later.
+</div>
+}
+@else {
+<div class="rounded-lg border border-emerald-200 bg-white/80 p-4 mb-1 cursor-pointer hover:bg-emerald-50 transition"
+    (click)="toggle()">
+    <div class="flex justify-between items-center">
+        <h3 class="font-medium text-emerald-800">{{ title }}</h3>
+
+        <span class="text-emerald-600 text-xl select-none">
+            @if (opened()) { – } @else { + }
+        </span>
+    </div>
+
+    @if (opened()) {
+    <p class="mt-3 text-emerald-700 text-sm leading-relaxed">
+        {{ details }}
+    </p>
+    }
+</div>
+}

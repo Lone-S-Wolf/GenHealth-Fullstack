@@ -1,0 +1,33 @@
+<article class="flex flex-col h-full rounded-2xl bg-emerald-50 shadow-sm border border-slate-100 p-5">
+    <!-- Photo + Name -->
+    <div class="flex items-center gap-3 mb-3">
+        <img [src]="item.photoUrl" [alt]="item.name" loading="lazy"
+            class="h-12 w-12 rounded-full object-cover bg-slate-200" />
+
+        <div>
+            <h3 class="text-lg font-semibold text-slate-900">
+                {{ item.name }}
+            </h3>
+            <p class="text-md text-slate-500">
+                {{ item.role }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Rating -->
+    <div class="flex items-center gap-1 mb-3">
+        @for (s of stars; track $index) {
+        <span class="text-lg" [class.text-yellow-400]="item.rating >= s" [class.text-slate-300]="item.rating < s">
+            ★
+        </span>
+        }
+        <span class="ml-1 text-sm text-slate-500">
+            {{ item.rating | number: '1.1-1' }}/5
+        </span>
+    </div>
+
+    <!-- Message -->
+    <p class="text-md text-slate-700 leading-relaxed">
+        "{{ item.message }}"
+    </p>
+</article>

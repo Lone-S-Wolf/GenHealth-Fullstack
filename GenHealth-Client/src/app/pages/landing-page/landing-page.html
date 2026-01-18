@@ -1,0 +1,109 @@
+<section id="hero-section" class="flex justify-center mx-auto px-4 bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-300">
+    @if (heroError) {
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ heroError }}
+    </div>
+    }
+
+    @if (heroSlides$ | async; as slides) {
+    <app-hero-carousel [slides]="slides"></app-hero-carousel>
+    } @else {
+    <!-- Fallback while observable is still resolving -->
+    <div
+        class="h-64 md:h-80 lg:h-[420px] flex items-center justify-center rounded-2xl bg-slate-200 text-slate-500 text-sm">
+        Loading hero images...
+    </div>
+    }
+</section>
+
+<section id="about-section" class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-300">
+    @if (aboutError) {
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 text-sm text-red-700">
+        {{ aboutError }}
+    </div>
+    }
+
+    @if (aboutSection$ | async; as aboutSection) {
+    <app-about-section [section]="aboutSection"></app-about-section>
+    } @else {
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+            Loading about section...
+        </div>
+    </div>
+    }
+</section>
+
+<section id="services-section" class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-300">
+    @if (servicesError) {
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ servicesError }}
+    </div>
+    }
+
+    @if (servicesSection$ | async; as servicesSection) {
+    <app-services-section [section]="servicesSection"></app-services-section>
+    } @else {
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+            Loading services...
+        </div>
+    </div>
+    }
+</section>
+
+<section class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-300">
+    @if (whyError) {
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ whyError }}
+    </div>
+    }
+
+    @if (whyChooseUs$ | async; as why) {
+    <app-why-choose-us [section]="why"></app-why-choose-us>
+    } @else {
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+            Loading reasons...
+        </div>
+    </div>
+    }
+</section>
+
+<section class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-300">
+    @if (topDoctorsError) {
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ topDoctorsError }}
+    </div>
+    }
+
+    @if (topDoctorsSection$ | async; as topDoctorsSection) {
+    <app-top-doctors-section [section]="topDoctorsSection"></app-top-doctors-section>
+    } @else {
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+            Loading top doctors...
+        </div>
+    </div>
+    }
+</section>
+
+<section class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-300">
+    @if (testimonialsError) {
+    <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        {{ testimonialsError }}
+    </div>
+    }
+
+    @if (testimonialsSection$ | async; as testimonialsSection) {
+    <app-testimonials-section [section]="testimonialsSection"></app-testimonials-section>
+    } @else {
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+            Loading testimonials...
+        </div>
+    </div>
+    }
+</section>
+
+<app-footer></app-footer>

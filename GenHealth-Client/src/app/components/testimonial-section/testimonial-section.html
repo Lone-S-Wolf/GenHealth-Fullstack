@@ -1,0 +1,57 @@
+<section class="relative max-w-[1570px] mx-auto px-4 py-30">
+    @if (!section) {
+    <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+        Loading testimonials...
+    </div>
+    } @else if (section.testimonials.length === 0) {
+    <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+        No testimonials available right now.
+    </div>
+    } @else {
+
+    <!-- Header -->
+    <header class="mb-6">
+        <h2 class="text-8xl font-semibold tracking-[0.2em] text-white">
+            {{ section.heading }}
+        </h2>
+
+        @if (section.subtitle) {
+        <p class="mt-2 text-xl text-white max-w-2xl">
+            {{ section.subtitle }}
+        </p>
+        }
+    </header>
+
+    <div class="relative overflow-hidden">
+
+        <!-- LEFT ARROW -->
+        <button type="button" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 
+               h-9 w-9 flex items-center justify-center rounded-full 
+               bg-white shadow-md border border-slate-200
+               hover:bg-emerald-50 transition" (click)="scrollLeft()">
+            <span class="text-lg">&#8592;</span>
+        </button>
+
+        <!-- RIGHT ARROW -->
+        <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 z-20
+               h-9 w-9 flex items-center justify-center rounded-full 
+               bg-white shadow-md border border-slate-200
+               hover:bg-emerald-50 transition" (click)="scrollRight()">
+            <span class="text-lg">&#8594;</span>
+        </button>
+
+        <!-- SCROLLABLE TRACK -->
+        <div #scrollContainer class="h-60 flex gap-4 overflow-x-auto snap-x snap-mandatory py-4 -mx-4 px-4 hide-scrollbar">
+            @for (t of section.testimonials; track trackItem($index, t)) {
+            <div class="snap-center shrink-0 
+                   w-[85%] sm:w-[60%] md:w-[45%] lg:w-[35%]
+                   transition-all duration-300 
+                   hover:scale-105 hover:shadow-xl">
+                <app-testimonial-card [item]="t"></app-testimonial-card>
+            </div>
+            }
+        </div>
+
+    </div>
+    }
+</section>

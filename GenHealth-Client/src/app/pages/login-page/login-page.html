@@ -1,0 +1,244 @@
+<div class="min-h-max bg-slate-100 flex items-start justify-center p-6">
+    <div class="max-w-7xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+        <!-- LEFT SIDE -->
+        <div>
+            <img src="./images/Login-image.png" alt="Login welcome image" class="max-h-[800px] w-[600px]">
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="md:w-1/2 px-8 py-8 flex items-center justify-center bg-white">
+            @if (currentForm === 'login') {
+            <!-- LOGIN FORM -->
+            <div class="w-full max-w-xs">
+                <h2 class="text-center text-2xl font-bold tracking-wide text-blue-600 mb-6">
+                    LOGIN
+                </h2>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="space-y-4">
+                    <!-- USERNAME -->
+                    <div class="flex flex-col gap-1">
+                        <label for="login-username" class="text-sm font-medium text-slate-800">User Name</label>
+                        <input id="login-username" type="text" formControlName="username" class="w-full form-input" />
+
+                        @if (
+                        loginUsername.touched &&
+                        loginUsername.errors?.['required']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            User name is required.
+                        </small>
+                        }
+
+                        @if (
+                        loginUsername.touched &&
+                        loginUsername.errors?.['minlength']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            User name must be at least
+                            {{ loginUsername.errors?.['minlength']?.requiredLength }}
+                            characters.
+                        </small>
+                        }
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="flex flex-col gap-1">
+                        <label for="login-password" class="text-sm font-medium text-slate-800">Password</label>
+                        <input id="login-password" type="password" formControlName="password" class="w-full form-input"
+                            [readonly]="!loginUsername.valid" [class.bg-slate-100]="!loginUsername.valid"
+                            [class.cursor-not-allowed]="!loginUsername.valid" />
+
+                        @if (
+                        loginPassword.touched &&
+                        loginPassword.errors?.['required']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            Password is required.
+                        </small>
+                        }
+
+                        @if (
+                        loginPassword.touched &&
+                        loginPassword.errors &&
+                        !loginPassword.errors['required']
+                        ) {
+                        @if (loginPassword.errors['minLength']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must be at least 8 characters.
+                        </small>
+                        }
+                        @if (loginPassword.errors['uppercase']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one uppercase letter.
+                        </small>
+                        }
+                        @if (loginPassword.errors['lowercase']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one lowercase letter.
+                        </small>
+                        }
+                        @if (loginPassword.errors['number']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one digit.
+                        </small>
+                        }
+                        @if (loginPassword.errors['special']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one special character.
+                        </small>
+                        }
+                        }
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button type="button" class="text-xs text-amber-600 hover:underline">
+                            Forgot Password?
+                        </button>
+                    </div>
+
+                    <div class="flex gap-4 pt-1">
+                        <button type="submit" [disabled]="loginForm.invalid" class="flex-1 btn-login">
+                            Login
+                        </button>
+                        <button type="button" class="flex-1 btn-cancel">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-4 flex items-center justify-center gap-1 text-xs text-slate-700">
+                    <span>NEW USER? SIGN UP</span>
+                    <button type="button" class="text-blue-600 hover:underline pl-0" (click)="switchToRegister()">
+                        HERE
+                    </button>
+                </div>
+            </div>
+            } @else {
+            <!-- REGISTER FORM -->
+            <div class="w-full max-w-xs">
+                <h2 class="text-center text-2xl font-bold tracking-wide text-blue-600 mb-6">
+                    REGISTER
+                </h2>
+
+                <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="space-y-4">
+                    <!-- EMAIL -->
+                    <div class="flex flex-col gap-1">
+                        <label for="reg-email" class="text-sm font-medium text-slate-800">Email</label>
+                        <input id="reg-email" type="email" formControlName="email" class="w-full form-input" />
+
+                        @if (
+                        registerEmail.touched &&
+                        registerEmail.errors?.['required']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            Email is required.
+                        </small>
+                        }
+
+                        @if (
+                        registerEmail.touched &&
+                        registerEmail.errors?.['email']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            Please enter a valid email address.
+                        </small>
+                        }
+                    </div>
+
+                    <!-- MOBILE -->
+                    <div class="flex flex-col gap-1">
+                        <label for="reg-mobile" class="text-sm font-medium text-slate-800">Mobile Number</label>
+                        <input id="reg-mobile" type="tel" formControlName="mobile" class="w-full form-input"
+                            [readonly]="!registerEmail.valid" [class.bg-slate-100]="!registerEmail.valid"
+                            [class.cursor-not-allowed]="!registerEmail.valid" />
+
+                        @if (
+                        registerMobile.touched &&
+                        registerMobile.errors?.['required']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            Mobile number is required.
+                        </small>
+                        }
+
+                        @if (
+                        registerMobile.touched &&
+                        registerMobile.errors?.['indianMobile']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            Enter a valid Indian mobile number (10 digits starting
+                            with 6–9).
+                        </small>
+                        }
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="flex flex-col gap-1">
+                        <label for="reg-password" class="text-sm font-medium text-slate-800">Password</label>
+                        <input id="reg-password" type="password" formControlName="password" class="w-full form-input"
+                            [readonly]="!registerMobile.valid" [class.bg-slate-100]="!registerMobile.valid"
+                            [class.cursor-not-allowed]="!registerMobile.valid" />
+
+                        @if (
+                        registerPassword.touched &&
+                        registerPassword.errors?.['required']
+                        ) {
+                        <small class="text-xs text-red-600">
+                            Password is required.
+                        </small>
+                        }
+
+                        @if (
+                        registerPassword.touched &&
+                        registerPassword.errors &&
+                        !registerPassword.errors['required']
+                        ) {
+                        @if (registerPassword.errors['minLength']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must be at least 8 characters.
+                        </small>
+                        }
+                        @if (registerPassword.errors['uppercase']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one uppercase letter.
+                        </small>
+                        }
+                        @if (registerPassword.errors['lowercase']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one lowercase letter.
+                        </small>
+                        }
+                        @if (registerPassword.errors['number']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one digit.
+                        </small>
+                        }
+                        @if (registerPassword.errors['special']) {
+                        <small class="text-xs text-red-600 block">
+                            Password must contain at least one special character.
+                        </small>
+                        }
+                        }
+                    </div>
+
+                    <div class="flex gap-4 pt-1">
+                        <button type="submit" [disabled]="registerForm.invalid" class="flex-1 btn-login">
+                            Register
+                        </button>
+                        <button type="button" class="flex-1 btn-cancel" (click)="switchToLogin()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-4 flex items-center justify-center gap-1 text-xs text-slate-700">
+                    <span>ALREADY HAVE AN ACCOUNT?</span>
+                    <button type="button" class="text-blue-600 hover:underline pl-0" (click)="switchToLogin()">
+                        LOGIN HERE
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

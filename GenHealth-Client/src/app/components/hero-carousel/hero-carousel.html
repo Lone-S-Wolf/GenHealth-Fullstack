@@ -1,0 +1,49 @@
+<div class="relative rounded-2xl overflow-hidden bg-slate-100 mt-1">
+    @if (!slides) {
+    <!-- Input not yet provided / still resolving -->
+    <div class="flex items-center justify-center text-slate-500 text-sm">
+        Loading hero images...
+    </div>
+    } @else if (!hasSlides) {
+    <!-- Input arrived but empty -->
+    <div class="flex items-center justify-center text-slate-400 text-sm">
+        No hero images available.
+    </div>
+    } @else {
+    <div class="relative max-h-[900px] max-w-[1600px]">
+        <!-- Active image -->
+        <img class="w-full h-full object-cover" [src]="activeSlide?.imageUrl"
+            [alt]="activeSlide?.altText || ('Hero image ' + (currentIndex + 1))" loading="lazy" />
+
+        <!-- Left arrow -->
+        <button type="button" class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 items-center justify-center
+               h-10 w-10 rounded-full bg-white/80 hover:bg-white shadow
+               focus:outline-none focus:ring focus:ring-emerald-500" (click)="prev()" aria-label="Previous slide">
+            <span class="inline-block text-lg"><</span>
+        </button>
+
+        <!-- Right arrow -->
+        <button type="button" class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 items-center justify-center
+               h-10 w-10 rounded-full bg-white/80 hover:bg-white shadow
+               focus:outline-none focus:ring focus:ring-emerald-500" (click)="next()" aria-label="Next slide">
+            <span class="inline-block text-lg">></span>
+        </button>
+
+        <!-- Dots -->
+        <div class="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2"
+            aria-label="Carousel position indicators">
+            @for (slide of slides!; track slide.id; let i = $index) {
+            <button type="button" class="h-2.5 w-2.5 rounded-full border border-white/80
+                   transition-all duration-200
+                   hover:scale-110
+                   @if (i === currentIndex) {
+                     bg-emerald-500
+                   } @else {
+                     bg-white/70
+                   }" [attr.aria-label]="'Go to slide ' + (i + 1)"
+                [attr.aria-current]="i === currentIndex ? 'true' : 'false'" (click)="goTo(i)"></button>
+            }
+        </div>
+    </div>
+    }
+</div>

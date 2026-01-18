@@ -1,0 +1,35 @@
+<section class="max-w-[1570px] mx-auto px-4 py-10">
+    @if (!section) {
+    <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+        Loading reasons...
+    </div>
+    } @else if (section.reasons.length === 0) {
+    <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+        No reasons available.
+    </div>
+    } @else {
+    <!-- Heading -->
+    <header class="mt-30">
+        <h2 class="text-7xl font-semibold tracking-[0.2em] text-white text-center">
+            {{ section.heading }}
+        </h2>
+    </header>
+
+    <!-- Horizontal infinite scroll container -->
+    <div #scrollContainer class="w-full overflow-x-hidden flex gap-4 py-10 select-none hide-scrollbar">
+        @for (reason of reasonsExtended; track reason.id + '-' + $index) {
+        <div class="min-w-[250px] h-[250px] bg-emerald-50 rounded-xl flex flex-col items-center justify-center p-4
+                 transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-default" (mouseenter)="pauseScrolling()"
+            (mouseleave)="resumeScrolling()">
+            <!-- Icon -->
+            <img [src]="reason.iconUrl" [alt]="reason.text" class="w-[100px] h-[100px] object-contain mb-3" loading="lazy" />
+
+            <!-- Text -->
+            <p class="text-center text-lg text-emerald-900 leading-snug">
+                {{ reason.text }}
+            </p>
+        </div>
+        }
+    </div>
+    }
+</section>

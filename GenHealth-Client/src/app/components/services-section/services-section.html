@@ -1,0 +1,28 @@
+<section class="max-w-[1570px] mx-auto px-4 pt-30">
+    @if (!section) {
+    <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+        Loading services...
+    </div>
+    } @else {
+    <!-- Heading -->
+    <header class="mb-6">
+        <h2 class="text-8xl font-bold tracking-[0.2em] text-white">
+            {{ section.heading }}
+        </h2>
+
+        @if (section.subtitle) {
+        <p class="mt-10 text-3xl text-white">
+            {{ section.subtitle }}
+        </p>
+        }
+    </header>
+
+    <!-- Blocks -->
+    <div class="space-y-6">
+        @for (block of section.blocks; track trackBlock($index, block)) {
+        <app-service-block [title]="block.title" [body]="block.body" [imageUrl]="block.imageUrl"
+            [imageAlt]="block.imageAlt" [layout]="block.layout"></app-service-block>
+        }
+    </div>
+    }
+</section>

@@ -1,0 +1,64 @@
+<section class="max-w-[1570px] mx-auto px-4 pt-30">
+    @if (!section) {
+    <div class="flex h-40 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-500">
+        Loading about section...
+    </div>
+    } @else {
+    <!-- Heading -->
+    <header class="mb-6">
+        <h2 class="text-8xl font-bold tracking-[0.2em] text-white">
+            {{ section.heading }}
+        </h2>
+    </header>
+
+    <div class="space-y-6">
+        @for (block of section.blocks; track trackBlock($index, block)) {
+        @if (block.layout === 'text-left') {
+        <!-- Text left, image right -->
+        <div class="grid gap-1 md:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)] items-stretch mt-10">
+            <!-- Text card -->
+            <article class="rounded-2xl p-6">
+                <h3 class="mb-3 text-5xl font-semibold text-white">
+                    {{ block.title }}
+                </h3>
+
+                <div class="pt-10 space-y-10 text-2xl leading-relaxed text-white">
+                    @for (paragraph of block.body; track $index) {
+                    <p>{{ paragraph }}</p>
+                    }
+                </div>
+            </article>
+
+            <!-- Image -->
+            <div class="rounded-2xl overflow-hidden bg-slate-100">
+                <img class="h-full w-full object-cover" [src]="block.imageUrl" [alt]="block.imageAlt || block.title"
+                    loading="lazy" />
+            </div>
+        </div>
+        } @else {
+        <!-- Image left, text right -->
+        <div class="grid gap-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2.5fr)] items-stretch mt-10">
+            <!-- Image -->
+            <div class="rounded-2xl overflow-hidden bg-slate-100">
+                <img class="h-full w-full object-cover" [src]="block.imageUrl" [alt]="block.imageAlt || block.title"
+                    loading="lazy" />
+            </div>
+
+            <!-- Text card -->
+            <article class="rounded-2xl p-6">
+                <h3 class="mb-3 text-5xl font-semibold text-white">
+                    {{ block.title }}
+                </h3>
+
+                <div class="pt-10 space-y-10 text-2xl leading-relaxed text-white">
+                    @for (paragraph of block.body; track $index) {
+                    <p>{{ paragraph }}</p>
+                    }
+                </div>
+            </article>
+        </div>
+        }
+        }
+    </div>
+    }
+</section>

@@ -1,0 +1,42 @@
+<article class="h-full flex flex-col items-center rounded-2xl bg-emerald-50 shadow-sm border border-slate-100 overflow-hidden">
+    <!-- Photo -->
+    <div class="h-[250px] w-1/2 overflow-hidden bg-white rounded-full">
+        <img class="h-full w-full object-cover" [src]="doctor.photoUrl" [alt]="doctor.name" loading="lazy" />
+    </div>
+
+    <!-- Content -->
+    <div class="flex flex-1 flex-col p-4">
+        <div class="mb-2">
+            <h3 class="text-lg font-semibold text-slate-900">
+                {{ doctor.name }}
+            </h3>
+            <p class="text-md text-emerald-600 mt-0.5">
+                {{ doctor.speciality }}
+            </p>
+        </div>
+
+        <!-- Rating + experience -->
+        <div class="mb-2 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+                @for (star of stars; track $index) {
+                <span class="text-lg" [class.text-yellow-400]="doctor.rating >= star"
+                    [class.text-slate-300]="doctor.rating < star">
+                    ★
+                </span>
+                }
+                <span class="ml-1 text-sm text-slate-500">
+                    {{ doctor.rating | number: '1.1-1' }}/5
+                </span>
+            </div>
+
+            <div class="text-sm text-slate-500">
+                {{ doctor.experienceYears }}+ yrs exp.
+            </div>
+        </div>
+
+        <!-- Bio -->
+        <p class="mb-3 line-clamp-3 text-sm leading-relaxed text-slate-700">
+            {{ doctor.bio }}
+        </p>
+    </div>
+</article>
